@@ -3,6 +3,7 @@
 
 #include "MyEnemyCharacter.h"
 #include "MyAbilitySystemComponent.h"
+#include "MyAttributeSet.h"
 
 AMyEnemyCharacter::AMyEnemyCharacter()
 {
@@ -10,6 +11,8 @@ AMyEnemyCharacter::AMyEnemyCharacter()
 
 	AbilitySystemComponent = CreateDefaultSubobject<UMyAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+	AttributeSet = CreateDefaultSubobject<UMyAttributeSet>("AttributeSet");
 }
 
 void AMyEnemyCharacter::BeginPlay()
@@ -18,4 +21,5 @@ void AMyEnemyCharacter::BeginPlay()
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 
 	GiveDefaultAbilities();
+	InitDefaultAttributes();
 }

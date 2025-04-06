@@ -8,6 +8,7 @@
 #include "MyPlayerState.generated.h"
 
 class UMyAbilitySystemComponent;
+class UMyAttributeSet;
 
 UCLASS()
 class GASTOYPROJECT_API AMyPlayerState : public APlayerState, public IAbilitySystemInterface
@@ -19,9 +20,13 @@ public:
 	AMyPlayerState();
 public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	virtual UMyAttributeSet* GetAttributeSet() const;
+
 
 protected:
 	UPROPERTY()
 	TObjectPtr<UMyAbilitySystemComponent> AbilitySystemComponent;
 
+	UPROPERTY()
+	TObjectPtr<UMyAttributeSet> AttributeSet;
 };

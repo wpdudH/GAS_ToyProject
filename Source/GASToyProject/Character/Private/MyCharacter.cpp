@@ -31,6 +31,11 @@ UAbilitySystemComponent* AMyCharacter::GetAbilitySystemComponent() const
 	return AbilitySystemComponent;
 }
 
+UMyAttributeSet* AMyCharacter::GetAttributeSet() const
+{
+	return AttributeSet;
+}
+
 void AMyCharacter::GiveDefaultAbilities()
 {
 	check(AbilitySystemComponent);
@@ -42,5 +47,21 @@ void AMyCharacter::GiveDefaultAbilities()
 	{
 		const FGameplayAbilitySpec AbilitySpec(AbilityClass, 1);
 		AbilitySystemComponent->GiveAbility(AbilitySpec);
+	}
+}
+
+
+void AMyCharacter::InitDefaultAttributes() const
+{
+	if (!AbilitySystemComponent || !DefaultAttributeEffect) { return; }
+
+	FGameplayEffectContextHandle EffectContext = AbilitySystemComponent->MakeEffectContext();
+	EffectContext.AddSourceObject(this);
+
+	const FGameplayEffectSpecHandle SpecHandle = AbilitySystemComponent->MakeOutgoingSpec(DefaultAttributeEffect, 1.f, EffectContext);
+
+	if (SpecHandle.IsValid())
+	{
+		AbilitySystemComponent->ApplyGameplayEffectSpecToSelf(*SpecHandle.Data.Get());
 	}
 }

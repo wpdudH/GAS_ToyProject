@@ -9,6 +9,8 @@
 
 class UGameplayAbility;
 class UMyAbilitySystemComponent;
+class UMyAttributeSet;
+class UGameplayEffect;
 
 UCLASS()
 class GASTOYPROJECT_API AMyCharacter : public ACharacter, public IAbilitySystemInterface
@@ -19,7 +21,10 @@ public:
 	// Sets default values for this character's properties
 	AMyCharacter();
 
+	// 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	virtual UMyAttributeSet* GetAttributeSet() const;
 
 public:	
 	// Called every frame
@@ -30,10 +35,17 @@ public:
 
 protected:
 	void GiveDefaultAbilities();
+	void InitDefaultAttributes() const;
+
+	UPROPERTY()
+	TObjectPtr<UMyAttributeSet> AttributeSet;
 
 	UPROPERTY()
 	TObjectPtr<UMyAbilitySystemComponent> AbilitySystemComponent;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
 	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ability")
+	TSubclassOf<UGameplayEffect> DefaultAttributeEffect;
 };

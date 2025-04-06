@@ -3,6 +3,7 @@
 
 #include "MyPlayerState.h"
 #include "MyAbilitySystemComponent.h"
+#include "MyAttributeSet.h"
 
 // Sets default values
 AMyPlayerState::AMyPlayerState()
@@ -12,10 +13,16 @@ AMyPlayerState::AMyPlayerState()
 
 	AbilitySystemComponent = CreateDefaultSubobject<UMyAbilitySystemComponent>("AbilitySystemComponent");
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
+	AttributeSet = CreateDefaultSubobject<UMyAttributeSet>("AttributeSet");
 }
 
 UAbilitySystemComponent* AMyPlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+UMyAttributeSet* AMyPlayerState::GetAttributeSet() const
+{
+	return AttributeSet;
 }
 
