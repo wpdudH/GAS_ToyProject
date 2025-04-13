@@ -28,6 +28,7 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompone
 
 UAbilitySystemComponent* AMyCharacter::GetAbilitySystemComponent() const
 {
+
 	return AbilitySystemComponent;
 }
 
